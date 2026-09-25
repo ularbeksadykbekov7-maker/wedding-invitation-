@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ратбек & Марсияна — Свадебное Приглашение</title>
+    
+    <!-- Google Fonts with full Cyrillic support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: {
+                            900: '#1a0006',
+                            800: '#2b030d',
+                            700: '#420817',
+                            600: '#5c0b1e',
+                            500: '#781028',
+                        },
+                        gold: {
+                            100: '#fcf6ba',
+                            200: '#f3e5ab',
+                            300: '#e6c875',
+                            400: '#d4af37',
+                            500: '#aa820a',
+                            600: '#876500',
+                        },
+                        cream: {
+                            100: '#fffdf9',
+                            200: '#fdfbf7',
+                            300: '#f7f2e7',
+                            400: '#ede3d1',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Custom Scrollbar and Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+            background-color: #1a0006;
+            color: #f3e5ab;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Velvet radial gradient background */
+        .velvet-bg {
+            background: radial-gradient(circle at center, #420817 0%, #2b030d 50%, #1a0006 100%);
+        }
+
+        /* Dark Burgundy Lace Overlay Effect */
+        .lace-overlay {
+            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#d4af37 0.75px, #1a0006 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.05;
+        }
+
+        /* Cream Vintage Paper Card Texture */
+        .cream-card {
+            background: linear-gradient(135deg, #fffdf9 0%, #fdfbf7 50%, #f5ecd9 100%);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 40px rgba(212, 175, 55, 0.15);
+            color: #2b030d;
+        }
+
+        /* Gold Metallic Text Gradient */
+        .gold-text {
+            background: linear-gradient(135deg, #fcf6ba 0%, #bf953f 25%, #fcf6ba 50%, #b38728 75%, #fbf5b7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Metallic Border Effect */
+        .gold-border {
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7) 1;
+        }
+
+        /* Golden Glow Animation */
+        @keyframes goldShine {
+            0% { filter: drop-shadow(0 0 2px rgba(212,175,55,0.3)); }
+            50% { filter: drop-shadow(0 0 12px rgba(212,175,55,0.8)); }
+            100% { filter: drop-shadow(0 0 2px rgba(212,175,55,0.3)); }
+        }
+
+        .gold-glow {
+            animation: goldShine 3s infinite ease-in-out;
+        }
+
+        /* Floating Animation */
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        .floating {
+            animation: floatGentle 5s ease-in-out infinite;
+        }
+
+        /* 3D Envelope Perspective Styling */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .envelope-flap {
+            transform-origin: top center;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .envelope-open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        /* Reveal Section Animations on Scroll */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Audio Wave Visualizer Indicator */
+        @keyframes soundWave {
+            0%, 100% { height: 4px; }
+            50% { height: 16px; }
+        }
+
+        .bar1 { animation: soundWave 1.2s ease-in-out infinite 0.1s; }
+        .bar2 { animation: soundWave 1.2s ease-in-out infinite 0.3s; }
+        .bar3 { animation: soundWave 1.2s ease-in-out infinite 0.2s; }
+    </style>
+</head>
+<body class="velvet-bg min-h-screen text-amber-100 font-serif relative selection:bg-gold-400 selection:text-burgundy-900">
+
+    <!-- Background Animated Canvas (Doves, Butterflies, Petals, Golden Dust) -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-10 w-full h-full"></canvas>
+
+    <!-- Subtle Lace Pattern Overlay -->
+    <div class="fixed inset-0 lace-overlay pointer-events-none z-0"></div>
+
+    <!-- Hidden Audio Player & Sound Controls -->
+    <audio id="weddingAudio" loop preload="auto">
+        <!-- Royalty Free Romantic Piano Track Fallback -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-116327.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Subtle Music Control Button (Top Right) -->
+    <div id="musicControl" class="fixed top-5 right-5 z-50 flex items-center gap-2 bg-burgundy-900/80 backdrop-blur-md border border-gold-400/40 rounded-full px-3 py-1.5 shadow-2xl opacity-0 transition-opacity duration-700 pointer-events-auto">
+        <button id="toggleAudioBtn" aria-label="Музыка" class="flex items-center gap-2 text-gold-300 hover:text-gold-100 focus:outline-none">
+            <span class="text-xs font-sans tracking-widest uppercase">Музыка</span>
+            <div id="waveBars" class="flex items-end gap-0.5 h-4 w-4">
+                <span class="w-1 bg-gold-400 rounded-full bar1"></span>
+                <span class="w-1 bg-gold-400 rounded-full bar2"></span>
+                <span class="w-1 bg-gold-400 rounded-full bar3"></span>
+            </div>
+        </button>
+        <!-- Custom MP3 File Loader Button -->
+        <label for="customAudioInput" title="Загрузить свою песню MP3" class="cursor-pointer text-gold-400/60 hover:text-gold-200 text-xs pl-1 border-l border-gold-400/20">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+        </label>
+        <input type="file" id="customAudioInput" accept="audio/mp3,audio/*" class="hidden">
+    </div>
+
+    <!-- ENVELOPE SCREEN OVERLAY (First Interactive Screen) -->
+    <div id="envelopeOverlay" class="fixed inset-0 z-40 flex flex-col items-center justify-center p-4 velvet-bg transition-all duration-1000">
+        
+        <div class="text-center mb-8 transform transition-transform duration-700 hover:scale-105">
+            <p class="font-sans text-xs tracking-[0.3em] uppercase text-gold-300/80 mb-2">Приглашение на свадьбу</p>
+            <h1 class="font-script text-4xl sm:text-5xl text-gold-200 gold-text">Ратбек & Марсияна</h1>
+        </div>
+
+        <!-- 3D Envelope Container -->
+        <div id="envelopeContainer" class="perspective-1000 w-full max-w-sm sm:max-w-md h-72 sm:h-80 relative cursor-pointer group">
+            
+            <!-- Envelope Body Base -->
+            <div class="absolute inset-0 bg-burgundy-800 rounded-2xl shadow-2xl border border-gold-500/30 overflow-hidden flex items-center justify-center">
+                <!-- Inner Velvet Pocket Shadow -->
+                <div class="absolute inset-0 bg-gradient-to-t from-burgundy-900 to-transparent opacity-80"></div>
+                
+                <!-- Inner Cream Card Preview (Slides Upwards) -->
+                <div id="innerPreviewCard" class="cream-card w-11/12 h-5/6 rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-inner transform translate-y-12 transition-transform duration-1000 ease-out border border-gold-400/40">
+                    <p class="font-script text-3xl sm:text-4xl text-burgundy-900">Ратбек & Марсияна</p>
+                    <div class="w-12 h-0.5 bg-gold-400 my-3"></div>
+                    <p class="font-sans text-xs tracking-widest text-burgundy-800 uppercase">22 Октября 2026</p>
+                </div>
+            </div>
+
+            <!-- Envelope Bottom & Side Triangular Fold SVGs -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none drop-shadow-md" viewBox="0 0 400 280" preserveAspectRatio="none">
+                <!-- Left Side Flap -->
+                <polygon points="0,0 200,140 0,280" fill="#2b030d" opacity="0.9" border="1"/>
+                <!-- Right Side Flap -->
+                <polygon points="400,0 200,140 400,280" fill="#23020a" opacity="0.9"/>
+                <!-- Bottom Flap -->
+                <polygon points="0,280 200,130 400,280" fill="#360511"/>
+                <!-- Gold Lining Lines -->
+                <polyline points="0,0 200,140 400,0" fill="none" stroke="#d4af37" stroke-width="0.75" opacity="0.3"/>
+            </svg>
+
+            <!-- Envelope Top Flap (Animated Opening) -->
+            <div id="topFlap" class="envelope-flap absolute top-0 left-0 right-0 h-1/2 z-20">
+                <svg class="w-full h-full drop-shadow-xl" viewBox="0 0 400 140" preserveAspectRatio="none">
+                    <polygon points="0,0 400,0 200,140" fill="#420817"/>
+                    <polyline points="0,0 200,140 400,0" fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.6"/>
+                </svg>
+            </div>
+
+            <!-- Realistic Gold Wax Seal (Center Click Target) -->
+            <div id="waxSeal" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center justify-center transition-transform duration-700 group-hover:scale-110">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-gold-200 via-gold-400 to-gold-600 shadow-2xl flex items-center justify-center p-1 relative border-2 border-gold-100 gold-glow">
+                    <!-- Wax Rim Texture -->
+                    <div class="w-full h-full rounded-full bg-gradient-to-tr from-gold-500 via-gold-300 to-gold-200 flex items-center justify-center shadow-inner border border-gold-600/50">
+                        <span class="font-serif font-bold text-lg sm:text-xl text-burgundy-900 tracking-wider">Р & М</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Touch Prompt Indicator -->
+        <div class="mt-8 text-center animate-pulse">
+            <p class="font-sans text-xs tracking-[0.25em] text-gold-300/90 uppercase">Нажмите, чтобы открыть</p>
+            <div class="w-1 h-8 bg-gradient-to-b from-gold-300 to-transparent mx-auto mt-2 rounded-full"></div>
+        </div>
+    </div>
+
+    <!-- MAIN SCROLLABLE PRESENTATION WRAPPER -->
+    <main id="mainContent" class="relative z-20 max-w-xl mx-auto px-4 py-12 space-y-24 sm:space-y-32">
+
+        <!-- ==================== SECTION 1: HEADER & NAMES ==================== -->
+        <section class="min-h-[85vh] flex flex-col items-center justify-center text-center reveal-on-scroll">
+            <div class="relative p-8 sm:p-12 w-full flex flex-col items-center">
+                <!-- Floral Gold Top Corner Flourish SVG -->
+                <svg class="w-24 h-12 text-gold-400 mb-6 opacity-80" viewBox="0 0 100 40" fill="currentColor">
+                    <path d="M50 0 C30 15 10 5 0 20 C10 35 30 25 50 40 C70 25 90 35 100 20 C90 5 70 15 50 0 Z M50 10 C60 18 75 15 85 20 C75 25 60 22 50 30 C40 22 25 25 15 20 C25 15 40 18 50 10 Z"/>
+                </svg>
+
+                <p class="font-sans text-xs sm:text-sm tracking-[0.35em] text-gold-300 uppercase mb-4">Свадебное Приглашение</p>
+                
+                <h1 class="font-script text-5xl sm:text-7xl text-gold-200 gold-text py-2 my-2 leading-tight floating">
+                    Ратбек <br><span class="text-3xl sm:text-4xl text-gold-300">&</span><br> Марсияна
+                </h1>
+
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent my-6"></div>
+
+                <p class="font-serif text-lg sm:text-xl text-gold-100/90 font-light max-w-md leading-relaxed italic">
+                    «С радостью приглашаем вас разделить с нами этот особенный день»
+                </p>
+
+                <!-- Scroll Down Subtle Cue -->
+                <div class="mt-16 flex flex-col items-center opacity-70">
+                    <span class="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-300/80 mb-2">Пролистайте вниз</span>
+                    <div class="w-5 h-9 border-2 border-gold-400/50 rounded-full flex justify-center p-1">
+                        <div class="w-1 h-2 bg-gold-300 rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 2: VINTAGE CREAM LETTER ==================== -->
+        <section class="reveal-on-scroll">
+            <div class="cream-card rounded-3xl p-8 sm:p-12 relative border-2 border-gold-400/40 transform transition-transform duration-500 hover:scale-[1.01]">
+                
+                <!-- Corner Decorative Borders -->
+                <div class="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-gold-500"></div>
+                <div class="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-gold-500"></div>
+                <div class="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-gold-500"></div>
+                <div class="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-gold-500"></div>
+
+                <div class="text-center space-y-6">
+                    <div class="inline-block p-2 rounded-full border border-gold-500/30 mb-2">
+                        <svg class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+
+                    <h2 class="font-serif text-2xl sm:text-3xl text-burgundy-900 font-semibold tracking-wide">
+                        Дорогие наши родные и близкие!
+                    </h2>
+
+                    <div class="w-16 h-0.5 bg-gold-500/40 mx-auto"></div>
+
+                    <p class="font-serif text-base sm:text-lg text-burgundy-900/90 leading-relaxed font-normal">
+                        Мы будем счастливы видеть вас рядом в один из самых важных дней нашей жизни.
+                    </p>
+
+                    <p class="font-serif text-base sm:text-lg text-burgundy-900/90 leading-relaxed font-normal italic">
+                        Разделите с нами радость, тепло и любовь этого прекрасного дня.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 3: GRAND DATE ==================== -->
+        <section class="reveal-on-scroll text-center py-6">
+            <div class="bg-burgundy-800/60 backdrop-blur-md rounded-3xl p-8 sm:p-12 border border-gold-400/30 shadow-2xl relative overflow-hidden">
+                <p class="font-sans text-xs tracking-[0.3em] uppercase text-gold-300/80 mb-6">Дата торжества</p>
+                
+                <div class="flex flex-col items-center justify-center my-4">
+                    <span class="font-serif text-7xl sm:text-8xl font-bold gold-text tracking-tighter leading-none">22</span>
+                    <span class="font-serif text-2xl sm:text-3xl tracking-[0.25em] text-gold-200 uppercase my-2">ОКТЯБРЯ</span>
+                    <span class="font-sans text-lg tracking-[0.3em] text-gold-400/90 font-light">2026</span>
+                </div>
+
+                <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold-400/40 bg-burgundy-900/80 my-4">
+                    <svg class="w-4 h-4 text-gold-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="font-serif text-xl text-gold-200">16:00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 4: VENUE DETAILS ==================== -->
+        <section class="reveal-on-scroll">
+            <div class="cream-card rounded-3xl p-8 sm:p-12 relative border-2 border-gold-400/40 text-center">
+                <p class="font-sans text-xs tracking-[0.3em] uppercase text-burgundy-800/80 mb-3">Место нашей встречи</p>
+                
+                <h2 class="font-serif text-3xl sm:text-4xl text-burgundy-900 font-bold tracking-wider uppercase my-2">
+                    «АК БАТА»
+                </h2>
+                <p class="font-serif text-lg text-gold-600 font-semibold italic mb-4">Ресторан</p>
+
+                <div class="w-12 h-0.5 bg-gold-400 mx-auto my-4"></div>
+
+                <p class="font-sans text-sm tracking-widest text-burgundy-900 uppercase font-medium mb-6">
+                    ГОРОД МАНАС
+                </p>
+
+                <!-- Interactive Map Location Button -->
+                <a href="https://maps.google.com/?q=город+Манас+ресторан+Ак+бата" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-burgundy-900 text-gold-200 font-sans text-xs tracking-widest uppercase hover:bg-burgundy-800 transition-colors shadow-lg border border-gold-400/40">
+                    <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span>Открыть на карте</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 5: COUNTDOWN TIMER ==================== -->
+        <section class="reveal-on-scroll text-center">
+            <p class="font-sans text-xs tracking-[0.3em] uppercase text-gold-300/80 mb-8">До праздника осталось</p>
+            
+            <div id="countdown" class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+                <!-- Days -->
+                <div class="bg-burgundy-800/80 border border-gold-400/30 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-lg">
+                    <span id="timerDays" class="font-serif text-2xl sm:text-4xl font-bold gold-text">00</span>
+                    <span class="font-sans text-[10px] sm:text-xs text-gold-300/70 tracking-widest uppercase mt-1">Дней</span>
+                </div>
+                <!-- Hours -->
+                <div class="bg-burgundy-800/80 border border-gold-400/30 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-lg">
+                    <span id="timerHours" class="font-serif text-2xl sm:text-4xl font-bold gold-text">00</span>
+                    <span class="font-sans text-[10px] sm:text-xs text-gold-300/70 tracking-widest uppercase mt-1">Часов</span>
+                </div>
+                <!-- Minutes -->
+                <div class="bg-burgundy-800/80 border border-gold-400/30 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-lg">
+                    <span id="timerMinutes" class="font-serif text-2xl sm:text-4xl font-bold gold-text">00</span>
+                    <span class="font-sans text-[10px] sm:text-xs text-gold-300/70 tracking-widest uppercase mt-1">Минут</span>
+                </div>
+                <!-- Seconds -->
+                <div class="bg-burgundy-800/80 border border-gold-400/30 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-lg">
+                    <span id="timerSeconds" class="font-serif text-2xl sm:text-4xl font-bold gold-text">00</span>
+                    <span class="font-sans text-[10px] sm:text-xs text-gold-300/70 tracking-widest uppercase mt-1">Секунд</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 6: ATMOSPHERE & POEM ==================== -->
+        <section class="reveal-on-scroll text-center min-h-[50vh] flex flex-col items-center justify-center my-12">
+            <div class="max-w-md px-6 py-12 rounded-3xl bg-burgundy-900/40 backdrop-blur-sm border border-gold-400/20">
+                <p class="font-serif text-2xl sm:text-3xl text-gold-200 leading-relaxed font-light italic gold-glow">
+                    «Пусть этот день останется в наших сердцах навсегда.»
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 7: FINAL LUXURY CARD ==================== -->
+        <section class="reveal-on-scroll pb-16">
+            <div class="cream-card rounded-3xl p-8 sm:p-12 text-center border-4 border-gold-400/50 relative shadow-2xl">
+                <!-- Inner Gold Filigree Frame -->
+                <div class="border border-gold-500/40 p-6 sm:p-8 rounded-2xl">
+                    <p class="font-serif text-xl sm:text-2xl text-burgundy-900 leading-relaxed font-medium mb-6">
+                        Будем рады разделить этот счастливый день вместе с вами.
+                    </p>
+
+                    <h3 class="font-script text-4xl sm:text-5xl text-gold-600 my-4">
+                        Ратбек & Марсияна
+                    </h3>
+
+                    <div class="w-16 h-0.5 bg-gold-400 mx-auto my-6"></div>
+
+                    <div class="space-y-1 font-serif text-burgundy-900/90 text-base">
+                        <p class="font-semibold">22.10.2026 — 16:00</p>
+                        <p class="italic">Ресторан «Ак бата»</p>
+                        <p class="font-sans text-xs tracking-widest uppercase opacity-80">Город Манас</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. ENVELOPE OPENING & AUDIO TRIGGER ---
+            const envelopeOverlay = document.getElementById('envelopeOverlay');
+            const envelopeContainer = document.getElementById('envelopeContainer');
+            const innerPreviewCard = document.getElementById('innerPreviewCard');
+            const weddingAudio = document.getElementById('weddingAudio');
+            const musicControl = document.getElementById('musicControl');
+            const toggleAudioBtn = document.getElementById('toggleAudioBtn');
+            const waveBars = document.getElementById('waveBars');
+            const customAudioInput = document.getElementById('customAudioInput');
+
+            let isEnvelopeOpened = false;
+
+            function openEnvelope() {
+                if (isEnvelopeOpened) return;
+                isEnvelopeOpened = true;
+
+                // Play Audio on User Interaction
+                playAudio();
+
+                // Step 1: Open Top Flap
+                envelopeContainer.classList.add('envelope-open');
+
+                // Step 2: Slide Inner Card Upwards after 400ms
+                setTimeout(() => {
+                    innerPreviewCard.style.transform = 'translateY(-60px) scale(1.05)';
+                }, 400);
+
+                // Step 3: Zoom In Envelope and Fade Out Overlay
+                setTimeout(() => {
+                    envelopeOverlay.style.opacity = '0';
+                    envelopeOverlay.style.pointerEvents = 'none';
+                    musicControl.classList.remove('opacity-0');
+                }, 1200);
+
+                // Step 4: Hide overlay completely after animation
+                setTimeout(() => {
+                    envelopeOverlay.style.display = 'none';
+                }, 2200);
+            }
+
+            envelopeContainer.addEventListener('click', openEnvelope);
+
+            // --- 2. AUDIO PLAY / PAUSE CONTROLS ---
+            function playAudio() {
+                weddingAudio.play().then(() => {
+                    waveBars.classList.remove('opacity-30');
+                }).catch(err => {
+                    console.log('Audio autoplay blocked or waiting for interaction:', err);
+                });
+            }
+
+            toggleAudioBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (weddingAudio.paused) {
+                    weddingAudio.play();
+                    waveBars.style.display = 'flex';
+                } else {
+                    weddingAudio.pause();
+                    waveBars.style.display = 'none';
+                }
+            });
+
+            // Custom MP3 File Upload Handler
+            customAudioInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const fileURL = URL.createObjectURL(file);
+                    weddingAudio.src = fileURL;
+                    weddingAudio.play();
+                    waveBars.style.display = 'flex';
+                }
+            });
+
+            // --- 3. COUNTDOWN TIMER LOGIC ---
+            const targetDate = new Date('2026-10-22T16:00:00').getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference > 0) {
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    document.getElementById('timerDays').innerText = String(days).padStart(2, '0');
+                    document.getElementById('timerHours').innerText = String(hours).padStart(2, '0');
+                    document.getElementById('timerMinutes').innerText = String(minutes).padStart(2, '0');
+                    document.getElementById('timerSeconds').innerText = String(seconds).padStart(2, '0');
+                } else {
+                    document.getElementById('countdown').innerHTML = '<span class="col-span-4 text-gold-200 font-serif text-2xl">Событие началось!</span>';
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // --- 4. SCROLL REVEAL OBSERVER ---
+            const observerOptions = {
+                root: null,
+                threshold: 0.15,
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // --- 5. CANVAS PARTICLE ANIMATION (Doves, Butterflies, Petals, Gold Particles) ---
+            const canvas = document.getElementById('ambientCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            // Particles arrays
+            const goldSparkles = [];
+            const petals = [];
+            const butterflies = [];
+            const doves = [];
+
+            // Gold Sparkle Object
+            class GoldSparkle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.alpha = Math.random();
+                    this.speedAlpha = (Math.random() * 0.02) + 0.005;
+                    this.vy = -(Math.random() * 0.3 + 0.1);
+                }
+                update() {
+                    this.y += this.vy;
+                    this.alpha += this.speedAlpha;
+                    if (this.alpha >= 1 || this.alpha <= 0) {
+                        this.speedAlpha = -this.speedAlpha;
+                    }
+                    if (this.y < 0) this.reset();
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(212, 175, 55, ${Math.max(0, this.alpha)})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Falling Flower Petal Object
+            class Petal {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = -20;
+                    this.size = Math.random() * 6 + 4;
+                    this.vy = Math.random() * 1 + 0.5;
+                    this.vx = Math.sin(Math.random() * Math.PI) * 0.5;
+                    this.angle = Math.random() * 360;
+                    this.angularSpeed = (Math.random() - 0.5) * 2;
+                    this.opacity = Math.random() * 0.5 + 0.3;
+                }
+                update() {
+                    this.y += this.vy;
+                    this.x += Math.sin(this.y * 0.02) * 0.5 + this.vx;
+                    this.angle += this.angularSpeed;
+                    if (this.y > height + 20) this.reset();
+                }
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.angle * Math.PI / 180);
+                    ctx.fillStyle = `rgba(247, 225, 230, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            // Flying White Dove Object
+            class Dove {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = -60;
+                    this.y = Math.random() * (height * 0.6) + 50;
+                    this.speed = Math.random() * 0.8 + 0.4;
+                    this.wingState = 0;
+                    this.wingSpeed = 0.08;
+                    this.size = Math.random() * 0.4 + 0.6;
+                }
+                update() {
+                    this.x += this.speed;
+                    this.wingState += this.wingSpeed;
+                    if (this.x > width + 80) this.reset();
+                }
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.scale(this.size, this.size);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                    
+                    const wingY = Math.sin(this.wingState) * 12;
+
+                    // Body
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 12, 5, -0.2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Left Wing
+                    ctx.beginPath();
+                    ctx.moveTo(-2, 0);
+                    ctx.quadraticCurveTo(-6, -18 + wingY, -18, -12 + wingY);
+                    ctx.quadraticCurveTo(-6, -4, 4, 0);
+                    ctx.fill();
+
+                    // Tail
+                    ctx.beginPath();
+                    ctx.moveTo(-10, 0);
+                    ctx.lineTo(-18, -4);
+                    ctx.lineTo(-16, 2);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    ctx.restore();
+                }
+            }
+
+            // Golden Butterfly Object
+            class Butterfly {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = height + 30;
+                    this.vx = (Math.random() - 0.5) * 1;
+                    this.vy = -(Math.random() * 0.8 + 0.4);
+                    this.wing = 0;
+                    this.wingSpeed = 0.15;
+                    this.size = Math.random() * 5 + 6;
+                }
+                update() {
+                    this.x += Math.sin(this.y * 0.03) + this.vx;
+                    this.y += this.vy;
+                    this.wing += this.wingSpeed;
+                    if (this.y < -30) this.reset();
+                }
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    const flap = Math.abs(Math.sin(this.wing));
+                    
+                    ctx.fillStyle = 'rgba(243, 229, 171, 0.7)';
+                    
+                    // Left wing
+                    ctx.beginPath();
+                    ctx.ellipse(-this.size * flap / 2, 0, this.size * flap, this.size / 1.5, 0.3, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Right wing
+                    ctx.beginPath();
+                    ctx.ellipse(this.size * flap / 2, 0, this.size * flap, this.size / 1.5, -0.3, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.restore();
+                }
+            }
+
+            // Initialize Particles
+            for (let i = 0; i < 40; i++) goldSparkles.push(new GoldSparkle());
+            for (let i = 0; i < 15; i++) petals.push(new Petal());
+            for (let i = 0; i < 4; i++) butterflies.push(new Butterfly());
+            for (let i = 0; i < 2; i++) doves.push(new Dove());
+
+            // Main Animation Loop
+            function animateParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                goldSparkles.forEach(p => { p.update(); p.draw(); });
+                petals.forEach(p => { p.update(); p.draw(); });
+                butterflies.forEach(b => { b.update(); b.draw(); });
+                doves.forEach(d => { d.update(); d.draw(); });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            animateParticles();
+        });
+    </script>
+</body>
+</html>
